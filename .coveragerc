@@ -1,0 +1,6 @@
+[run]
+source = ./app
+omit = ./venv/*,*tests*
+
+[report]
+omit = ./venv/*,*tests*,*mi
