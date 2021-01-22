@@ -2,7 +2,7 @@ import os
 import pytest
 import shutil
 
-from app.models import Metrics, MetricsException
+from core.models import Metrics, MetricsException
 
 
 DATA_FOLDER: str = os.path.join(".", "tests")

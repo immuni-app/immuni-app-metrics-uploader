@@ -142,7 +142,11 @@ dmypy.json
 *.DS_Store
 tests/metrics/
 tests/metrics_processed/
-app/metrics/
-app/processed/
+metrics/
+metrics_processed/
 
 checks.sh
+
+/app/client_secrets.json
+/app/credentials.json
+/app/settings.yaml

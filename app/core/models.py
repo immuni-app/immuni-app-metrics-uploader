@@ -42,11 +42,12 @@ class Metrics:
                 raise MetricsException("File is empty")
             self._report_date: str = self._format_date(row[0])
 
-    def _detect_platform(self, cell: str) -> None:
+    def _detect_platform(self, cell: str) -> Platform:
         if cell == "Nome":
             return Platform.IOS
         elif cell == "Data":
             return Platform.ANDROID
+        raise MetricsException("Platform does not exist")
 
     def _format_date(self, date: str) -> str:
         date_time_obj: datetime
