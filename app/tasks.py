@@ -4,6 +4,9 @@ from core.models import Metrics, MetricsException
 from settings import METRICS_FOLDER, METRICS_PROCESSED_FOLDER, DEFAULT_UPLOADER
 from uploaders import get_uploader, UploaderException, UploaderObject
 
+from huey import SqliteHuey, crontab  # type: ignore
+
+
 if not os.path.exists(METRICS_FOLDER):
     os.makedirs(METRICS_FOLDER)
 
@@ -34,5 +37,10 @@ def upload_metrics() -> None:
                 print(ex)
 
 
-process_metrics()
-upload_metrics()
+huey = SqliteHuey(filename="/tmp/demo.db")
+
+
+@huey.periodic_task(crontab(minute="*/5"))
+def process_metrics_csv_files():
+    process_metrics()
+    upload_metrics()

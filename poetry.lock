@@ -204,6 +204,18 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "huey"
+version = "2.3.0"
+description = "huey, a little task queue"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+backends = ["redis (>=3.0.0)"]
+redis = ["redis (>=3.0.0)"]
+
+[[package]]
 name = "idna"
 version = "2.10"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -501,7 +513,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "877ff02d3d3b91680d875bfe429b46f414cf8ea7f9f5130426642c2d91f36903"
+content-hash = "52f7aecfd3cb4a457c11426d9edcbc575e636711cb452118798dc512f799b5e3"
 
 [metadata.files]
 appdirs = [
@@ -617,6 +629,9 @@ googleapis-common-protos = [
 httplib2 = [
     {file = "httplib2-0.18.1-py3-none-any.whl", hash = "sha256:ca2914b015b6247791c4866782fa6042f495b94401a0f0bd3e1d6e0ba2236782"},
     {file = "httplib2-0.18.1.tar.gz", hash = "sha256:8af66c1c52c7ffe1aa5dc4bcd7c769885254b0756e6e69f953c7f0ab49a70ba3"},
+]
+huey = [
+    {file = "huey-2.3.0.tar.gz", hash = "sha256:76978840a875607cd77c283c4ebf3ea5071b2ec06a1ac428d63be0d88f1e7070"},
 ]
 idna = [
     {file = "idna-2.10-py2.py3-none-any.whl", hash = "sha256:b97d804b1e9b523befed77c48dacec60e6dcb0b5391d57af6a65a312a90648c0"},
