@@ -37,17 +37,27 @@ class Metrics:
             for row in csv_reader:
                 if line_count == 0:
                     self._platform: Platform = self._detect_platform(row[0])
+                    self._check_header_is_valid(row[1], Platform.ANDROID)
+                if line_count == 4:
+                    self._check_header_is_valid(row[1], Platform.IOS)
                 line_count += 1
             if not row:
                 raise MetricsException("File is empty")
             self._report_date: str = self._format_date(row[0])
+
+    def _check_header_is_valid(self, cell: str, platform: Platform) -> None:
+        if platform == self.platform:
+            if self.platform == Platform.ANDROID and not cell.startswith("Acquisizione utenti"):
+                raise MetricsException("Header provided is not valid!")
+            elif self.platform == Platform.IOS and not cell == "Unità app":
+                raise MetricsException("Header provided is not valid!")
 
     def _detect_platform(self, cell: str) -> Platform:
         if cell == "Nome":
             return Platform.IOS
         elif cell == "Data":
             return Platform.ANDROID
-        raise MetricsException("Platform does not exist")
+        raise MetricsException("Platform does not exist or file is not valid")
 
     def _format_date(self, date: str) -> str:
         date_time_obj: datetime

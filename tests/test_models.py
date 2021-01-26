@@ -2,7 +2,7 @@ import os
 import pytest
 import shutil
 
-from core.models import Metrics, MetricsException
+from app.core.models import Metrics, MetricsException
 
 
 DATA_FOLDER: str = os.path.join(".", "tests")
@@ -34,4 +34,12 @@ def test_metrics():
 
     with pytest.raises(MetricsException):
         csv_file: str = os.path.join(METRICS_DEST_FOLDER, "invalid.csv")
+        Metrics(csv_file).export(os.path.join(METRICS_PROCESSED_FOLDER))
+
+    with pytest.raises(MetricsException):
+        csv_file: str = os.path.join(METRICS_DEST_FOLDER, "not_valid_android.csv")
+        Metrics(csv_file).export(os.path.join(METRICS_PROCESSED_FOLDER))
+
+    with pytest.raises(MetricsException):
+        csv_file: str = os.path.join(METRICS_DEST_FOLDER, "not_valid.ios.csv")
         Metrics(csv_file).export(os.path.join(METRICS_PROCESSED_FOLDER))
