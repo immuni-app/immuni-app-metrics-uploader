@@ -33,6 +33,7 @@ def upload_metrics() -> None:
         if os.path.isfile(file_path):
             try:
                 uploader.upload(f, file_path)
+                os.remove(file_path)
             except UploaderException as ex:
                 print(ex)
 
