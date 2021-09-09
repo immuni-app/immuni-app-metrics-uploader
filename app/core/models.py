@@ -47,7 +47,9 @@ class Metrics:
 
     def _check_header_is_valid(self, cell: str, platform: Platform) -> None:
         if platform == self.platform:
-            if self.platform == Platform.ANDROID and not cell.startswith("Acquisizione utenti"):
+            if self.platform == Platform.ANDROID and not cell.startswith(
+                "Acquisizione utenti"
+            ):
                 raise MetricsException("Header provided is not valid!")
             elif self.platform == Platform.IOS and not cell == "Unità app":
                 raise MetricsException("Header provided is not valid!")

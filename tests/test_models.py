@@ -10,14 +10,15 @@ METRICS_SAMPLE_FOLDER: str = os.path.join(DATA_FOLDER, "metrics_sample")
 METRICS_DEST_FOLDER: str = os.path.join(DATA_FOLDER, "metrics")
 METRICS_PROCESSED_FOLDER: str = os.path.join(DATA_FOLDER, "metrics_processed")
 
-shutil.rmtree(METRICS_DEST_FOLDER)
-shutil.rmtree(METRICS_PROCESSED_FOLDER)
-os.mkdir(METRICS_PROCESSED_FOLDER)
-
-shutil.copytree(METRICS_SAMPLE_FOLDER, METRICS_DEST_FOLDER)
-
 
 def test_metrics():
+
+    shutil.rmtree(METRICS_DEST_FOLDER, ignore_errors=True)
+    shutil.rmtree(METRICS_PROCESSED_FOLDER, ignore_errors=True)
+    os.mkdir(METRICS_PROCESSED_FOLDER)
+
+    shutil.copytree(METRICS_SAMPLE_FOLDER, METRICS_DEST_FOLDER)
+
     csv_file: str = os.path.join(METRICS_DEST_FOLDER, "android.csv")
     Metrics(csv_file).export(os.path.join(METRICS_PROCESSED_FOLDER))
 

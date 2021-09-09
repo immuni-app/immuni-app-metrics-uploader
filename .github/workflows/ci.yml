@@ -1,0 +1,35 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+# Credits: https://github.com/kaleidos-ventures/taiga-back/blob/main/.github/workflows/tests-and-coverall.yml
+
+name: CI - Tests and Coverage
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    name: Test on Python ${{ matrix.python-version }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }} 🐍
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8' 
+    - name: Prepare test env 📦
+      uses: abatilo/actions-poetry@v2.0.0
+      with:
+        poetry-version: '1.1.6'
+    - name: Install dependencies 🔧
+      run: |
+        poetry install
+    - name: Test with pytest and calculate coverage 🧪
+      run: |
+        poetry run flake8
+        poetry run coverage run -m pytest -s
