@@ -51,7 +51,7 @@ class Metrics:
                 "Acquisizione utenti"
             ):
                 raise MetricsException("Header provided is not valid!")
-            elif self.platform == Platform.IOS and not cell == "Unità app":
+            elif self.platform == Platform.IOS and not cell == "Primi download":
                 raise MetricsException("Header provided is not valid!")
 
     def _detect_platform(self, cell: str) -> Platform:
